@@ -2,9 +2,10 @@ class Cell {
   private readonly element: Element;
   public number: number;
   public isPredefined: boolean;
-  public guesses: number[];
+  public guesses: Set<number>;
   public readonly x: number;
   public readonly y: number;
+  public regionIndex: number;
 
   constructor(element: Element, x: number, y: number) {
     this.element = element;
@@ -17,12 +18,20 @@ class Cell {
     this.element.innerHTML =
       this.number === undefined ? '' : this.number.toString();
     this.element.classList.toggle('predefined', !this.isPredefined);
+    this.element.setAttribute(
+      'data-guesses',
+      this.number === undefined
+        ? Array.from(this.guesses)
+            .sort()
+            .join(' ')
+        : ''
+    );
   }
 
   public clear() {
     this.number = undefined;
     this.isPredefined = false;
-    this.guesses = [];
+    this.guesses = new Set();
     this.render();
   }
 }

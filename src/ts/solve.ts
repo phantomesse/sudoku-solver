@@ -42,36 +42,105 @@ function solve(cells: Cell[][]) {
     rows.push(new _Line(rowCells));
   }
 
+  let wasNumberCountsUpdated = false;
   while (numberCounts.size > 0) {
+    wasNumberCountsUpdated = false;
     for (let number of numberCounts.keys()) {
       if (numberCounts.get(number) === 0) {
         numberCounts.delete(number);
         continue;
       }
 
+      // Check regions.
       let regionsWithoutNumber = regions.filter(
         region => !region.hasNumber(number)
       );
       for (let region of regionsWithoutNumber) {
         let availableCells = region.getAvailableCells();
-        let potentialCells = [];
-        for (let cell of availableCells) {
-          if (
-            !rows[cell.x].hasNumber(number) &&
-            !columns[cell.y].hasNumber(number)
-          ) {
-            cell.guesses.push(number);
-            potentialCells.push(cell);
-          }
-        }
-        if (potentialCells.length === 1) {
-          potentialCells[0].number = number;
-          potentialCells[0].render();
+        let updated = _checkAvailableCells(
+          number,
+          availableCells,
+          rows,
+          columns,
+          regions
+        );
+        if (updated) {
           numberCounts.set(number, numberCounts.get(number) - 1);
+          wasNumberCountsUpdated = true;
+        }
+      }
+
+      // Check columns.
+      let columnsWithoutNumber = columns.filter(
+        column => !column.hasNumber(number)
+      );
+      for (let column of columnsWithoutNumber) {
+        let availableCells = column.getAvailableCells();
+        let updated = _checkAvailableCells(
+          number,
+          availableCells,
+          rows,
+          columns,
+          regions
+        );
+        if (updated) {
+          numberCounts.set(number, numberCounts.get(number) - 1);
+          wasNumberCountsUpdated = true;
+        }
+      }
+
+      // Check rows.
+      let rowsWithoutNumber = rows.filter(row => !row.hasNumber(number));
+      for (let row of rowsWithoutNumber) {
+        let availableCells = row.getAvailableCells();
+        let updated = _checkAvailableCells(
+          number,
+          availableCells,
+          rows,
+          columns,
+          regions
+        );
+        if (updated) {
+          numberCounts.set(number, numberCounts.get(number) - 1);
+          wasNumberCountsUpdated = true;
         }
       }
     }
+    if (!wasNumberCountsUpdated) break;
   }
+}
+
+// returns a boolean to indicate whether a new number has been added.
+function _checkAvailableCells(
+  number: number,
+  availableCells: Cell[],
+  rows: _Line[],
+  columns: _Line[],
+  regions: _Region[]
+): boolean {
+  if (availableCells.length === 1) {
+    availableCells[0].number = number;
+    availableCells[0].render();
+    return true;
+  }
+  let potentialCells = [];
+  for (let cell of availableCells) {
+    if (
+      !regions[cell.regionIndex].hasNumber(number) &&
+      !rows[cell.x].hasNumber(number) &&
+      !columns[cell.y].hasNumber(number)
+    ) {
+      cell.guesses.add(number);
+      cell.render();
+      potentialCells.push(cell);
+    }
+  }
+  if (potentialCells.length === 1) {
+    potentialCells[0].number = number;
+    potentialCells[0].render();
+    return true;
+  }
+  return false;
 }
 
 class _Region {
@@ -81,6 +150,9 @@ class _Region {
   constructor(regionIndex: number, cells: Cell[][]) {
     this.regionIndex = regionIndex;
     this.cells = cells;
+    for (let cell of cells.flat()) {
+      cell.regionIndex = regionIndex;
+    }
   }
 
   hasNumber(number: number): boolean {
@@ -133,6 +205,10 @@ class _Line {
       if (cell.number === number) return true;
     }
     return false;
+  }
+
+  getAvailableCells(): Cell[] {
+    return this.cells.filter(cell => cell.number === undefined);
   }
 }
 

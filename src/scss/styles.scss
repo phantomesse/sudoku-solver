@@ -33,10 +33,27 @@ body {
   font: 4vmin 'Skranji', cursive;
   height: 100%;
   justify-content: center;
+  position: relative;
   width: 100%;
 
   &.predefined {
     color: lighten($bg-color, 20%);
+  }
+
+  &::before {
+    content: attr(data-guesses);
+    position: absolute;
+    top: 0;
+    left: 0;
+    font: 2vmin 'Roboto', sans-serif;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1vmin;
+    box-sizing: border-box;
   }
 
   // @for $i from 1 through 81 {
