@@ -1,0 +1,48 @@
+@import 'const/colors';
+
+html,
+body {
+  background: $bg-color;
+  border: 0;
+  color: $fg-color;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+body {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(9, 8vmin);
+  grid-template-rows: repeat(9, 8vmin);
+}
+
+.cell {
+  background-color: $bg-color;
+  border: 1px darken($bg-color, 10%) solid;
+  height: 100%;
+  width: 100%;
+
+  // @for $i from 1 through 81 {
+  //   &:nth-child(#{$i})::before {
+  //     content: '#{$i}';
+  //     display: block;
+  //   }
+  // }
+
+  @each $i in 4, 28, 34, 58 {
+    @for $j from 0 to 3 {
+      &:nth-child(#{$i + 9 * $j}),
+      &:nth-child(#{$i + 9 * $j + 1}),
+      &:nth-child(#{$i + 9 * $j + 2}) {
+        background: lighten($bg-color, 4%);
+      }
+    }
+  }
+}

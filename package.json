@@ -1,0 +1,27 @@
+{
+  "name": "sudoku-solver",
+  "version": "1.0.0",
+  "description": "A Sudoku solver.",
+  "scripts": {
+    "start": "gulp",
+    "build": "gulp build",
+    "clean": "gulp clean"
+  },
+  "author": "Lauren Zou",
+  "devDependencies": {
+    "cssnano": "^4.1.10",
+    "del": "^5.1.0",
+    "gulp": "^4.0.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-connect": "^5.7.0",
+    "gulp-deporder": "^1.2.0",
+    "gulp-inline-source": "^4.0.0",
+    "gulp-postcss": "^8.0.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-terser": "^1.2.0",
+    "gulp-typescript": "^6.0.0-alpha.1",
+    "postcss": "^7.0.26",
+    "sass": "^1.24.0",
+    "typescript": "^3.7.3"
+  }
+}

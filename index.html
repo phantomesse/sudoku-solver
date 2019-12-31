@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sudoku Solver</title>
+  <style>body,html{background:#323e40;border:0;color:#f2ab27;height:100%;margin:0;padding:0;width:100%}body{align-items:center;display:flex;justify-content:center}.board{display:grid;grid-template-columns:repeat(9,8vmin);grid-template-rows:repeat(9,8vmin)}.cell{background-color:#323e40;border:1px solid #1c2223;height:100%;width:100%}.cell:nth-child(13),.cell:nth-child(14),.cell:nth-child(15),.cell:nth-child(22),.cell:nth-child(23),.cell:nth-child(24),.cell:nth-child(28),.cell:nth-child(29),.cell:nth-child(30),.cell:nth-child(34),.cell:nth-child(35),.cell:nth-child(36),.cell:nth-child(37),.cell:nth-child(38),.cell:nth-child(39),.cell:nth-child(4),.cell:nth-child(43),.cell:nth-child(44),.cell:nth-child(45),.cell:nth-child(46),.cell:nth-child(47),.cell:nth-child(48),.cell:nth-child(5),.cell:nth-child(52),.cell:nth-child(53),.cell:nth-child(54),.cell:nth-child(58),.cell:nth-child(59),.cell:nth-child(6),.cell:nth-child(60),.cell:nth-child(67),.cell:nth-child(68),.cell:nth-child(69),.cell:nth-child(76),.cell:nth-child(77),.cell:nth-child(78){background:#3b494b}</style>
+</head>
+
+<body>
+
+  <div class="board">
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+  </div>
+
+  <script>class Cell{constructor(){}}class Board{constructor(){}}console.log("sudoku"),console.log("main");</script>
+</body>
+
+</html>
