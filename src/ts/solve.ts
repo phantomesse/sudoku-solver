@@ -1,6 +1,6 @@
 // requires: cell.js
 
-function solve(cells: Cell[][]) {
+async function solve(cells: Cell[][]) {
   // Get how many of each number we still need.
   let numberCounts: Map<number, number> = new Map();
   for (let i = 1; i <= 9; i++) {
@@ -115,10 +115,15 @@ function solve(cells: Cell[][]) {
         numberCounts.set(number, numberCounts.get(number) - 1);
         wasNumberCountsUpdated = true;
       }
+      // await sleep(100);
     }
 
     if (!wasNumberCountsUpdated) break;
   }
+}
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 function _updateCell(
@@ -138,6 +143,7 @@ function _updateCell(
     c.guesses.delete(number);
   }
   cell.number = number;
+  cell.guesses.clear();
   cell.render();
 }
 
