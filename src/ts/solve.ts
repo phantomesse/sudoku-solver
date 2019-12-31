@@ -106,8 +106,38 @@ function solve(cells: Cell[][]) {
         }
       }
     }
+
+    // Check if there's only one guess.
+    for (let cell of cells.flat()) {
+      if (cell.guesses.size === 1) {
+        let number = cell.guesses.values().next().value;
+        _updateCell(number, cell, rows, columns, regions);
+        wasNumberCountsUpdated = true;
+      }
+    }
+
     if (!wasNumberCountsUpdated) break;
   }
+}
+
+function _updateCell(
+  number: number,
+  cell: Cell,
+  rows: _Line[],
+  columns: _Line[],
+  regions: _Region[]
+) {
+  for (let c of rows[cell.x].cells) {
+    c.guesses.delete(number);
+  }
+  for (let c of columns[cell.y].cells) {
+    c.guesses.delete(number);
+  }
+  for (let c of regions[cell.regionIndex].cells.flat()) {
+    c.guesses.delete(number);
+  }
+  cell.number = number;
+  cell.render();
 }
 
 // returns a boolean to indicate whether a new number has been added.
@@ -119,8 +149,7 @@ function _checkAvailableCells(
   regions: _Region[]
 ): boolean {
   if (availableCells.length === 1) {
-    availableCells[0].number = number;
-    availableCells[0].render();
+    _updateCell(number, availableCells[0], rows, columns, regions);
     return true;
   }
   let potentialCells = [];
@@ -136,8 +165,7 @@ function _checkAvailableCells(
     }
   }
   if (potentialCells.length === 1) {
-    potentialCells[0].number = number;
-    potentialCells[0].render();
+    _updateCell(number, potentialCells[0], rows, columns, regions);
     return true;
   }
   return false;
