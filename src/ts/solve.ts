@@ -112,6 +112,7 @@ function solve(cells: Cell[][]) {
       if (cell.guesses.size === 1) {
         let number = cell.guesses.values().next().value;
         _updateCell(number, cell, rows, columns, regions);
+        numberCounts.set(number, numberCounts.get(number) - 1);
         wasNumberCountsUpdated = true;
       }
     }

@@ -1,7 +1,7 @@
 // requires: board.js
 
 let board = new Board();
-board.loadGame('data/hard.txt').then(function() {
+board.loadGame('data/expert.txt').then(function() {
   board.solve();
 });
 
